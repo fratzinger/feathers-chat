@@ -1,6 +1,6 @@
 import { KnexService } from '@feathersjs/knex'
 import type { KnexAdapterParams } from '@feathersjs/knex'
-import { resolveAll } from '@feathersjs/schema'
+import { resolveAll } from '../../@schema'
 import { authenticate } from '@feathersjs/authentication'
 import type { UsersData, UsersResult, UsersQuery } from './users.schema'
 import { usersResolvers } from './users.resolver'

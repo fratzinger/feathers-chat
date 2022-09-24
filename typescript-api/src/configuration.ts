@@ -1,36 +1,23 @@
-import { schema, Ajv } from '@feathersjs/schema'
-import type { Infer } from '@feathersjs/schema'
-import { authenticationSettingsSchema } from '@feathersjs/authentication'
+import { Type, Ajv, schema } from './@schema'
+import type { Infer } from './@schema'
+import { authenticationSettingsSchema } from './@authentication'
 
 export const configurationSchema = schema(
-  {
-    $id: 'ApplicationConfiguration',
-    type: 'object',
-    additionalProperties: false,
-    required: ['host', 'port', 'public', 'paginate'],
-    properties: {
-      host: { type: 'string' },
-      port: { type: 'number' },
-      public: { type: 'string' },
-      sqlite: {
-        type: 'object',
-        properties: {
-          client: { type: 'string' },
-          connection: { type: 'string' }
-        }
-      },
-      authentication: authenticationSettingsSchema,
-      paginate: {
-        type: 'object',
-        additionalProperties: false,
-        required: ['default', 'max'],
-        properties: {
-          default: { type: 'number' },
-          max: { type: 'number' }
-        }
-      }
-    }
-  } as const,
+  Type.Object({
+    host: Type.String(),
+    port: Type.Number(),
+    public: Type.String(),
+    sqlite: Type.Optional(Type.Object({
+      client: Type.String(),
+      connection: Type.String()
+    })),
+    authentication: authenticationSettingsSchema,
+    paginate: Type.Object({
+      default: Type.Number(),
+      max: Type.Number()
+    }, { additionalProperties: false }),
+    
+  }, { $id: 'ApplicationConfiguration', additionalProperties: false }),
   new Ajv()
 )
 

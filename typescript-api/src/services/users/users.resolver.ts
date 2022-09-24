@@ -1,13 +1,7 @@
 import crypto from 'crypto'
-import { resolve } from '@feathersjs/schema'
+import { resolve } from '../../@schema'
 import { passwordHash } from '@feathersjs/authentication-local'
 import type { HookContext } from '../../declarations'
-import type {
-  UsersData,
-  UsersPatch,
-  UsersResult,
-  UsersQuery
-} from './users.schema'
 import {
   usersDataSchema,
   usersPatchSchema,
@@ -15,8 +9,9 @@ import {
   usersQuerySchema
 } from './users.schema'
 
+
 // Resolver for the basic data model (e.g. creating new entries)
-export const usersDataResolver = resolve<UsersData, HookContext>({
+export const usersDataResolver = resolve<typeof usersDataSchema, HookContext>({
   schema: usersDataSchema,
   validate: 'before',
   properties: {
@@ -34,21 +29,21 @@ export const usersDataResolver = resolve<UsersData, HookContext>({
 })
 
 // Resolver for making partial updates
-export const usersPatchResolver = resolve<UsersPatch, HookContext>({
+export const usersPatchResolver = resolve<typeof usersPatchSchema, HookContext>({
   schema: usersPatchSchema,
   validate: 'before',
   properties: {}
 })
 
 // Resolver for the data that is being returned
-export const usersResultResolver = resolve<UsersResult, HookContext>({
+export const usersResultResolver = resolve<typeof usersResultSchema, HookContext>({
   schema: usersResultSchema,
   validate: false,
   properties: {}
 })
 
 // Resolver for the "safe" version that external clients are allowed to see
-export const usersDispatchResolver = resolve<UsersResult, HookContext>({
+export const usersDispatchResolver = resolve<typeof usersResultSchema, HookContext>({
   schema: usersResultSchema,
   validate: false,
   properties: {
@@ -58,7 +53,7 @@ export const usersDispatchResolver = resolve<UsersResult, HookContext>({
 })
 
 // Resolver for allowed query properties
-export const usersQueryResolver = resolve<UsersQuery, HookContext>({
+export const usersQueryResolver = resolve<typeof usersQuerySchema, HookContext>({
   schema: usersQuerySchema,
   validate: 'before',
   properties: {
@@ -72,7 +67,7 @@ export const usersQueryResolver = resolve<UsersQuery, HookContext>({
       }
 
       return value
-    }
+    },
   }
 })
 

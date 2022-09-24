@@ -50,6 +50,7 @@
     "@feathersjs/schema": "^5.0.0-pre.27",
     "@feathersjs/socketio": "^5.0.0-pre.27",
     "@feathersjs/transport-commons": "^5.0.0-pre.27",
+    "@sinclair/typebox": "^0.24.42",
     "knex": "^2.2.0",
     "koa-static": "^5.0.0",
     "sqlite3": "^5.0.9",
